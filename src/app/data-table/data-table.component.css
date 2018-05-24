@@ -1,0 +1,17 @@
+/* Structure */
+.container {
+  position: relative;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ngx-datatable.scroll-vertical {
+  height: 88%;
+}
+
+.downloadButton {
+  float: right;
+  margin: 5px;
+}
