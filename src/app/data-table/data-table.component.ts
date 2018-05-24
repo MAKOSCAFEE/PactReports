@@ -4,6 +4,11 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { ApiService } from '../services/api-service.service';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 @Component({
   selector: 'app-data-table',
@@ -17,7 +22,7 @@ export class DataTableComponent implements OnInit {
 
   resultsLength = 0;
   isLoadingResults = true;
-  isRateLimitReached = false;
+  isLoaded = false;
   timeout: any;
   rows;
   headers;
@@ -28,23 +33,37 @@ export class DataTableComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
+    const caregiverSqlViewId = 'z7PrGzK1Wj7';
+    this.getData(caregiverSqlViewId);
+  }
+
+  getData(sqlViewId: string) {
     this.isLoadingResults = true;
-    this.apiService.getSqlView('z7PrGzK1Wj7').subscribe(({ headers, data }) => {
+    this.isLoaded = false;
+    this.apiService.getSqlView(sqlViewId).subscribe(({ headers, data }) => {
       this.isLoadingResults = false;
+      this.isLoaded = true;
       this.headers = headers;
       this.rows = data;
     });
   }
 
-  onPage(event) {
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => {
-      console.log('paged!', event);
-    }, 100);
+  public exportAsExcelFile(json: any[], excelFileName: string): void {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+    this.saveAsExcelFile(excelBuffer, excelFileName);
   }
 
-  getRowHeight(row) {
-    return Math.floor(Math.random() * 80) + 50;
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
+
+  exportDataToExcel() {
+    this.exportAsExcelFile(this.rows, 'Beneficiaries');
   }
 }
 

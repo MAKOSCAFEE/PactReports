@@ -1,10 +1,15 @@
 <div class="container mat-elevation-z8">
-  <div class="header">
-    <button mat-raised-button class="downloadButton" color="primary">Download Excel</button>
+  <div class="header_table">
+    <button mat-raised-button class="downloadButton" color="primary" (click)="exportDataToExcel()" *ngIf="isLoaded">Download Excel</button>
   </div>
   <ngx-datatable class="material" style="top: 10px" [rows]='rows' [columnMode]="'standard'" [headerHeight]="50" [footerHeight]="50"
-    [rowHeight]="50" [scrollbarV]="true" (page)="onPage($event)">
+    [rowHeight]="50" [scrollbarV]="true" *ngIf="isLoaded">
     <ngx-datatable-column name={{header}} prop={{header}} width="130" *ngFor="let header of headers">
     </ngx-datatable-column>
   </ngx-datatable>
+
+  <div class="loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    <h3>This may take a while</h3>
+  </div>
 </div>

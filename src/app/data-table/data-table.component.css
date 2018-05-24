@@ -4,14 +4,29 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100%;
 }
 
 .ngx-datatable.scroll-vertical {
   height: 88%;
+  width: 99%;
 }
 
 .downloadButton {
   float: right;
   margin: 5px;
+}
+
+.loading-shade {
+  flex: 1;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header_table {
+  width: 100%;
 }
