@@ -11,14 +11,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { D2HttpClientModule } from 'd2-http-client';
 import * as Material from './material';
+import { TablePlaceholderComponent } from './table-placeholder/table-placeholder.component';
 
 @NgModule({
-  declarations: [AppComponent, MainNavComponent, DataTableComponent],
+  declarations: [AppComponent, MainNavComponent, DataTableComponent, TablePlaceholderComponent],
   imports: [
     BrowserModule,
-    D2HttpClientModule,
     HttpClientModule,
     NgxDatatableModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),

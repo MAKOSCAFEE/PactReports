@@ -9,9 +9,16 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent {
+  public sqlViewId: string;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    this.sqlViewId = null;
+  }
+
+  setExport(sqlViewId) {
+    this.sqlViewId = sqlViewId;
+  }
 }

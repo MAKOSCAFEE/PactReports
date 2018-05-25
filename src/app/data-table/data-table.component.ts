@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { merge, Observable, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { ApiService } from '../services/api-service.service';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
@@ -15,13 +12,10 @@ const EXCEL_EXTENSION = '.xlsx';
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent implements OnInit {
-  displayedColumns = ['created', 'state', 'number', 'title'];
-  exampleDatabase: any;
-  data: GithubIssue[] = [];
-
+export class DataTableComponent implements OnChanges {
+  @Input() sqlViewId: string;
   resultsLength = 0;
-  isLoadingResults = true;
+  isLoadingResults = false;
   isLoaded = false;
   timeout: any;
   rows;
@@ -32,9 +26,11 @@ export class DataTableComponent implements OnInit {
 
   constructor(private apiService: ApiService) {}
 
-  ngOnInit() {
-    const caregiverSqlViewId = 'z7PrGzK1Wj7';
-    this.getData(caregiverSqlViewId);
+  ngOnChanges(changes: SimpleChanges) {
+    const { sqlViewId } = changes;
+    if (sqlViewId && sqlViewId.currentValue) {
+      this.getData(sqlViewId.currentValue);
+    }
   }
 
   getData(sqlViewId: string) {
@@ -65,11 +61,4 @@ export class DataTableComponent implements OnInit {
   exportDataToExcel() {
     this.exportAsExcelFile(this.rows, 'Beneficiaries');
   }
-}
-
-export interface GithubIssue {
-  created_at: string;
-  number: string;
-  state: string;
-  title: string;
 }
