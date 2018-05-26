@@ -32,6 +32,12 @@
               {
                 "input": "node_modules/@swimlane/ngx-datatable/release/assets/icons.css"
               },
+              {
+                "input": "node_modules/angular-tree-component/dist/angular-tree-component.css"
+              },
+              {
+                "input": "node_modules/bootstrap/dist/css/bootstrap.css"
+              },
               "src/styles.css"
             ],
             "scripts": []

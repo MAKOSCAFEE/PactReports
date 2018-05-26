@@ -14,6 +14,7 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class DataTableComponent implements OnChanges {
   @Input() sqlViewId: string;
+  @Input() data: any;
   resultsLength = 0;
   isLoadingResults = false;
   isLoaded = false;
@@ -27,16 +28,18 @@ export class DataTableComponent implements OnChanges {
   constructor(private apiService: ApiService) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    const { sqlViewId } = changes;
-    if (sqlViewId && sqlViewId.currentValue) {
-      this.getData(sqlViewId.currentValue);
+    const { sqlViewId, data } = changes;
+
+    if (data && data.currentValue) {
+      const { ou, sqlViewId } = data.currentValue;
+      this.getData(ou, sqlViewId);
     }
   }
 
-  getData(sqlViewId: string) {
+  getData(ou: string, sqlViewId: string) {
     this.isLoadingResults = true;
     this.isLoaded = false;
-    this.apiService.getSqlView(sqlViewId).subscribe(({ headers, data }) => {
+    this.apiService.getSqlView(sqlViewId, ou).subscribe(({ headers, data }) => {
       this.isLoadingResults = false;
       this.isLoaded = true;
       this.headers = headers;
