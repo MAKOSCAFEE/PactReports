@@ -33,7 +33,6 @@ export class MainNavComponent {
     });
 
     dialogRef.afterClosed().subscribe((result: Result) => {
-      console.log('The dialog was closed');
       this.data = result;
     });
   }
@@ -42,5 +41,6 @@ export class MainNavComponent {
 export interface Result {
   pe: string;
   ou: string;
+  ouname: string;
   sqlViewId: string;
 }

@@ -49,8 +49,8 @@ export class FilterContainerComponent {
   }
 
   onOrgUnitUpdate(event): void {
-    const { value } = event;
-    this.data = { ...this.data, ou: value };
+    const { value, items } = event;
+    this.data = { ...this.data, ou: value, ouname: items[0].name };
     this.dialogRef.close(this.data);
   }
 
