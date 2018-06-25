@@ -4,8 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build":
-      "rm -rf dist && ng build --prod --aot --output-hashing all  --named-chunks false --build-optimizer --vendor-chunk  && cd dist/PactReports/ && zip -r -D Profiles-Export.zip .",
+    "build": "rm -rf dist && ng build --prod --aot --output-hashing all  --named-chunks false --build-optimizer --vendor-chunk  && cd dist/PactReports/ && zip -r -D Profiles-Export.zip .",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -25,6 +24,7 @@
     "@angular/pwa": "^0.6.3",
     "@angular/router": "^6.0.0",
     "@angular/service-worker": "^6.0.0",
+    "@hisptz/ngx-dhis2-menu": "^1.0.3",
     "@ngx-translate/core": "^10.0.2",
     "@swimlane/ngx-datatable": "^13.0.0",
     "angular-tree-component": "^7.2.0",

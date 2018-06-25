@@ -1,15 +1,15 @@
 /* Structure */
 ._container {
   position: relative;
-  position: relative;
   display: flex;
   flex-direction: column;
+  padding-top: 50px;
   align-items: center;
-  height: 100%;
+  height: 100vh;
 }
 
 .ngx-datatable.scroll-vertical {
-  height: 88%;
+  height: 100%;
   width: 99%;
 }
 
