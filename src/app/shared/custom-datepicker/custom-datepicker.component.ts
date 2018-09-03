@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
+import * as moment from 'moment';
 @Component({
   selector: 'app-custom-datepicker',
   templateUrl: './custom-datepicker.component.html',
@@ -25,15 +26,9 @@ export class CustomDatepickerComponent implements OnInit {
 
   onFormChanges() {
     this.customDatePicker.valueChanges.subscribe(form => {
-      const startDate = this.formatDateString(form.startDate);
-      const endDate = this.formatDateString(form.endDate);
+      const startDate = moment(form.startDate).format('YYYY-MM-DD');
+      const endDate = moment(form.endDate).format('YYYY-MM-DD');
       this.periodUpdate.emit({ period: { startDate, endDate } });
     });
-  }
-
-  formatDateString(updateDate: Date) {
-    const newDate = new Date(updateDate).toISOString();
-
-    return newDate.split('T')[0];
   }
 }

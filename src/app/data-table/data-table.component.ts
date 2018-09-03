@@ -46,12 +46,12 @@ export class DataTableComponent implements OnChanges {
   getData(ou: string, sqlViewId: string, startDate: string = null, endDate: string = null) {
     this.isLoadingResults = true;
     this.isLoaded = false;
-    this.apiService.getSqlView(sqlViewId, ou, startDate, endDate).subscribe(({ headers, data }) => {
-      this.isLoadingResults = false;
-      this.isLoaded = true;
-      this.headers = headers;
-      this.rows = data;
-    });
+    // this.apiService.getSqlView(sqlViewId, ou, startDate, endDate).subscribe(({ headers, data }) => {
+    //   this.isLoadingResults = false;
+    //   this.isLoaded = true;
+    //   this.headers = headers;
+    //   this.rows = data;
+    // });
   }
 
   public exportAsExcelFile(json: any[], excelFileName: string): void {
