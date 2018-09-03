@@ -40,15 +40,21 @@ export class OrgUnitFilterComponent implements OnInit, OnDestroy {
     placeholder: 'Select Organisation Unit'
   };
 
-  @Output() onOrgUnitUpdate: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onOrgUnitInit: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onOrgUnitModelUpdate: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onOrgUnitClose: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  onOrgUnitUpdate: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  onOrgUnitInit: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  onOrgUnitModelUpdate: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  onOrgUnitClose: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   orgUnit: any = {};
-  @ViewChild('orgtree') orgtree: TreeComponent;
+  @ViewChild('orgtree')
+  orgtree: TreeComponent;
 
-  @ViewChild('period_selector') period_selector: MultiselectComponent;
+  @ViewChild('period_selector')
+  period_selector: MultiselectComponent;
 
   organisationunits: any[] = [];
   selectedOrgUnits: any[] = [];

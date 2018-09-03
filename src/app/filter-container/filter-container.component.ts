@@ -11,6 +11,7 @@ export class FilterContainerComponent {
   orgUnitModel: any;
   selectedPeriodType: string;
   selectedPeriodObject: PeriodObject;
+  showDate: boolean;
 
   orgUnitTreeConfig: any = {
     show_search: true,
@@ -41,11 +42,12 @@ export class FilterContainerComponent {
       selectedUserOrgUnits: []
     };
     this.selectedPeriodType = 'Yearly';
+    this.showDate = data.showDate;
   }
 
   onPeriodUpdate(event: PeriodObject): void {
-    const { value } = event;
-    this.data = { ...this.data, pe: value };
+    const { period: pe } = event;
+    this.data = { ...this.data, pe };
   }
 
   onOrgUnitUpdate(event): void {
@@ -61,6 +63,7 @@ export class FilterContainerComponent {
 
 export interface PeriodObject {
   items: any[];
-  name: string;
-  value: string;
+  name?: string;
+  period?: any;
+  value?: string;
 }

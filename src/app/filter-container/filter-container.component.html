@@ -1,7 +1,7 @@
 <dir class="_container">
   <div class="filters__section">
-    <div class="filter">
-      <app-period-filter [periodConfig]="periodConfig" [selectedPeriodType]="selectedPeriodType" (onPeriodUpdate)="onPeriodUpdate($event)"></app-period-filter>
+    <div class="filter" *ngIf="showDate">
+      <app-custom-datepicker (periodUpdate)="onPeriodUpdate($event)"></app-custom-datepicker>
     </div>
     <div class="filter">
       <app-org-unit-filter [orgUnitModel]="orgUnitModel" [orgUnitTreeConfig]="orgUnitTreeConfig" (onOrgUnitUpdate)="onOrgUnitUpdate($event)"

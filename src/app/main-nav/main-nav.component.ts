@@ -6,7 +6,7 @@ import { FilterContainerComponent } from '../filter-container/filter-container.c
 import { MatDialog } from '@angular/material';
 
 @Component({
-  selector: 'main-nav',
+  selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
   styleUrls: ['./main-nav.component.css']
 })
@@ -21,15 +21,15 @@ export class MainNavComponent {
     this.sqlViewId = null;
   }
 
-  setExport(sqlViewId) {
+  setExport(sqlViewId, showDate = false) {
     this.sqlViewId = sqlViewId;
-    this.openDialog(sqlViewId);
+    this.openDialog(sqlViewId, showDate);
   }
 
-  openDialog(sqlViewId): void {
-    let dialogRef = this.dialog.open(FilterContainerComponent, {
+  openDialog(sqlViewId: string, showDate: boolean): void {
+    const dialogRef = this.dialog.open(FilterContainerComponent, {
       width: '50%',
-      data: { sqlViewId }
+      data: { sqlViewId, showDate }
     });
 
     dialogRef.afterClosed().subscribe((result: Result) => {

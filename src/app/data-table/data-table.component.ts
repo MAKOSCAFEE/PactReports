@@ -13,8 +13,10 @@ const EXCEL_EXTENSION = '.xlsx';
   styleUrls: ['./data-table.component.css']
 })
 export class DataTableComponent implements OnChanges {
-  @Input() sqlViewId: string;
-  @Input() data: any;
+  @Input()
+  sqlViewId: string;
+  @Input()
+  data: any;
   resultsLength = 0;
   isLoadingResults = false;
   isLoaded = false;
@@ -23,25 +25,28 @@ export class DataTableComponent implements OnChanges {
   headers;
   ouname;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator;
+  @ViewChild(MatSort)
+  sort: MatSort;
 
   constructor(private apiService: ApiService) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    const { sqlViewId, data } = changes;
+    const { data } = changes;
 
     if (data && data.currentValue) {
-      const { ou, sqlViewId, ouname } = data.currentValue;
+      const { ou, sqlViewId, ouname, pe } = data.currentValue;
       this.ouname = ouname;
-      this.getData(ou, sqlViewId);
+      const { startDate, endDate } = pe || { startDate: null, endDate: null };
+      this.getData(ou, sqlViewId, startDate, endDate);
     }
   }
 
-  getData(ou: string, sqlViewId: string) {
+  getData(ou: string, sqlViewId: string, startDate: string = null, endDate: string = null) {
     this.isLoadingResults = true;
     this.isLoaded = false;
-    this.apiService.getSqlView(sqlViewId, ou).subscribe(({ headers, data }) => {
+    this.apiService.getSqlView(sqlViewId, ou, startDate, endDate).subscribe(({ headers, data }) => {
       this.isLoadingResults = false;
       this.isLoaded = true;
       this.headers = headers;

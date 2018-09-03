@@ -1,6 +1,7 @@
 import 'hammerjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxDhis2MenuModule } from '@hisptz/ngx-dhis2-menu';
@@ -15,6 +16,7 @@ import * as Material from './material';
 import { TablePlaceholderComponent } from './table-placeholder/table-placeholder.component';
 import { FilterContainerComponent } from './filter-container/filter-container.component';
 import * as Shared from './shared';
+import { CustomDatepickerComponent } from './shared/custom-datepicker/custom-datepicker.component';
 
 @NgModule({
   declarations: [
@@ -22,10 +24,13 @@ import * as Shared from './shared';
     MainNavComponent,
     DataTableComponent,
     TablePlaceholderComponent,
-    FilterContainerComponent
+    FilterContainerComponent,
+    CustomDatepickerComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgxDatatableModule,
     NgxDhis2MenuModule.forRoot(),

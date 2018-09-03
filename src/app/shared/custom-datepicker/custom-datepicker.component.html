@@ -1,0 +1,13 @@
+<div class="custom-date-picker-container" [formGroup]="customDatePicker">
+  <mat-form-field>
+    <input matInput [matDatepicker]="startDate" placeholder="Start Date" formControlName="startDate">
+    <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+    <mat-datepicker #startDate></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="endDate" placeholder="End Date" formControlName="endDate">
+    <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+    <mat-datepicker #endDate></mat-datepicker>
+  </mat-form-field>
+</div>

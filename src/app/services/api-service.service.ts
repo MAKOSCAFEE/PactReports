@@ -9,11 +9,13 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  getSqlView(sqlViewId: string, orgUnitId: string): Observable<any> {
+  getSqlView(sqlViewId: string, orgUnitId: string, startDate?: string, endDate?: string): Observable<any> {
     const arrayToObject = (row, headers) =>
       Object.assign({}, ...row.map((item, index) => ({ [headers[index].column]: item })));
 
-    return this.http.get<sqlViewApi>(`../../../api/sqlViews/${sqlViewId}/data.json?var=orgUnitId:${orgUnitId}`).pipe(
+    const url = `../../../api/sqlViews/${sqlViewId}/data.json?var=orgUnitId:${orgUnitId}&var=startDate:${startDate}&var=endDate:${endDate}`;
+
+    return this.http.get<SqlViewApi>(url).pipe(
       map(({ rows, headers }) => ({
         headers: headers.map(header => header.column),
         data: rows.map(row => arrayToObject(row, headers))
@@ -22,7 +24,8 @@ export class ApiService {
   }
 
   getTei(ouUnits: string, programId: string): Observable<any> {
-    let url = `../../../api/trackedEntityInstances.json?ou=${ouUnits}&program=${programId}&ouMode=DESCENDANTS&skipPaging=true&fields=attributes[*]`;
+    let url = `../../../api/trackedEntityInstances.json?ou=${ouUnits}&program=${programId}&
+      ouMode=DESCENDANTS&skipPaging=true&fields=attributes[*]`;
     const { showRelatives, neededAttributes } = programs[programId];
     if (showRelatives) {
       url = `${url},relationships[relative[attributes[*]]]`;
@@ -49,7 +52,7 @@ export class ApiService {
   }
 }
 
-export interface sqlViewApi {
+export interface SqlViewApi {
   rows: any[];
   headers: Headers[];
 }
