@@ -1,14 +1,22 @@
 <ngx-dhis2-menu></ngx-dhis2-menu>
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)"
+  >
     <mat-nav-list>
       <a mat-list-item (click)="setExport('UbDMnkZN06S')">Export Caregiver</a>
       <a mat-list-item (click)="setExport('MEH5vFJNhxm')">Export OVC</a>
+      <a mat-list-item (click)="setExport('Th9OXMdz9fA')">Export Mining Caregiver</a>
+      <a mat-list-item (click)="setExport('qhdErR0tfFJ')">Export Mining OVC</a>
+      <a mat-list-item (click)="setExport('dHkAvwtmM5X')">Export Street Caregiver</a>
+      <a mat-list-item (click)="setExport('z5cGGjymJJx')">Export Street OVC</a>
       <a mat-list-item (click)="setExport('SxKeTm3xahM', true)">Monthly Report</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <app-data-table [sqlViewId]="sqlViewId" [data]="data"></app-data-table>
-  </mat-sidenav-content>
+  <mat-sidenav-content> <app-data-table [sqlViewId]="sqlViewId" [data]="data"></app-data-table> </mat-sidenav-content>
 </mat-sidenav-container>
